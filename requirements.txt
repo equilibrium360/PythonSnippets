@@ -2,3 +2,4 @@ numpy
 cryptography
 pandas
 jupyter
+flask
