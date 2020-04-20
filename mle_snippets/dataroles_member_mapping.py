@@ -19,6 +19,8 @@ def complex_df_agg_type1():
 
     by_group_id = df.groupby('group_id')
 
+    by_group_id.
+
    # by_group_id.apply()
 
    # print(type(by_group_id))
