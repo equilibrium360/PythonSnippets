@@ -6,7 +6,7 @@ app = Flask(__name__)
 stores = [
 
     {
-        'name': 'My Wonderful store',
+        'name': 'mac',
         'items': [
             {
                 'name': 'item name',
@@ -19,6 +19,7 @@ stores = [
 ]
 
 @app.route('/index')
+@app.route('/')
 def hello_world():
     return 'Hello, World!saaas'
 
@@ -28,9 +29,13 @@ def create_store():
     pass
 
 
-@app.route('/store/<string:name>', methods=['GET'])  # http://127.0.0.1/store/some_name
+# http://127.0.0.1/store/some_name
+@app.route('/store/<string:name>', methods=['GET'])
 def get_store(name):
-    pass
+    for store in stores:
+        if store['name'] == name :
+            return jsonify(store)
+    return jsonify({'message': 'no store found'})
 
 
 @app.route('/store', methods=['GET'])
@@ -38,14 +43,19 @@ def get_stores():
     return jsonify({'stores': stores})
 
 
-@app.route('/store/string:name/item', methods=['POST'])
+#aa
+@app.route('/store/<string:name>/item', methods=['POST'])
 def create_item_in_store(name):
     pass
 
 
-@app.route('/store/string:name/item', methods=['GET'])
-def get_item_in_store(name):
-    pass
+@app.route('/store/<string:name>/item', methods=['GET'])
+def get_items_in_store(name):
+    for store in stores:
+        if store['name'] == name:
+            return jsonify({'items': store['items']})
+    return jsonify({'message': 'no store matched'})
+
 
 
 app.run(debug=True)
